@@ -98,14 +98,20 @@ order: 1;
 flex-grow: 0;
 }
 
-/* .user{
-    display: flex;
-flex-direction: row;
-align-items: center;
-gap: 16px;
-position: absolute;
-left: 321px;
-top: 17px;
-border-radius: 12px;
-} */
+.user img{
+    height: 48px;
+    width: 48px;
+    padding-right: 25px;
+    border-radius: 30rem;
+    object-fit: cover;
+  }
+  
+  .user{
+    padding-top: 33px;
+  }
+
+  .user a {
+      padding: 0 15px 0 0;
+      font-size: 30px;
+  }
 

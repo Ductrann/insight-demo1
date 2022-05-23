@@ -1,6 +1,7 @@
-// import React from 'react'
+import React from 'react'
 import './Sibar.css'
-// 
+import { NavLink } from 'react-router-dom';
+import Picture from "../../assets/imgs/Picture2.png"
 import { HomeIcon, TicketIcon, InVoiceIcon, SettingIcon, SearchIcon, MailIcon, NotificationIcon } from '../../assets/imgs/icons/navBarIcon'; 
 
 const logo = require('../../assets/imgs/logo.png')
@@ -10,13 +11,12 @@ function Sibar(){
         <div className="Sibar">
             <div className="logo"></div>
             <div className="Frame">
-                <ul id='nav'>
-                    <li className='tag'><HomeIcon/><a href=''>Trang chủ</a></li>
-                    <li className='tag'><TicketIcon/><a href=''>Quản lý vé</a></li>
-                    <li className='tag'><InVoiceIcon/><a href=''>Đổi soát vé</a></li>
-                    <li className='tag'><SettingIcon/><a href=''>Cài Đặt</a></li>
-                    <li className='tag'><a href=''>Gói dịch vụ</a></li>
-                </ul>
+            <div  className='nav'>     
+                    <NavLink className="tag" to="/"><HomeIcon /> Trang chủ</NavLink>
+                    <NavLink className="tag" to="/Quanlyve"><TicketIcon />Quản lý vé</NavLink>
+                    <NavLink className="tag" to="/DoiSoatVe">< InVoiceIcon/> Đổi soát vé</NavLink>
+                    <NavLink className="tag" to="/DanhSachGoiVe"><SettingIcon /> Cài đặt</NavLink>
+                </div> 
             </div>
             <div className='searchBar'>
                 <input className='searchInput' placeholder='Search...'>
@@ -24,8 +24,9 @@ function Sibar(){
                     <SearchIcon/>
             </div>
             <div className="user">
-                <ul className="usericon"><MailIcon/></ul>
-                <ul className="usericon"><NotificationIcon/></ul>
+                    <NavLink to="/Mail"><MailIcon /></NavLink>
+                    <NavLink to="/Bell"><NotificationIcon /></NavLink>
+                    <img src={Picture} alt="User" />
             </div>
         </div>
     );
