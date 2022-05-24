@@ -1,8 +1,9 @@
 import React from 'react'
 import './Sibar.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Routes, Route } from 'react-router-dom';
 import Picture from "../../assets/imgs/Picture2.png"
 import { HomeIcon, TicketIcon, InVoiceIcon, SettingIcon, SearchIcon, MailIcon, NotificationIcon } from '../../assets/imgs/icons/navBarIcon'; 
+import Quanlyve from '../Quanlyve/Quanlyve';
 
 const logo = require('../../assets/imgs/logo.png')
 
@@ -18,16 +19,22 @@ function Sibar(){
                     <NavLink className="tag" to="/DanhSachGoiVe"><SettingIcon /> Cài đặt</NavLink>
                 </div> 
             </div>
+            <Routes>
+                <Route path="/" element={<HomeIcon/>}></Route> 
+                <Route path="/Quanlyve" element={<Quanlyve/>}></Route>
+          
+          
+          </Routes>
             <div className='searchBar'>
                 <input className='searchInput' placeholder='Search...'>
                 </input>
                     <SearchIcon/>
             </div>
             <div className="user">
-                    <NavLink to="/Mail"><MailIcon /></NavLink>
-                    <NavLink to="/Bell"><NotificationIcon /></NavLink>
-                    <img src={Picture} alt="User" />
-            </div>
+                    <NavLink to="/Mail"className="Notify-Item Notify-Mail"><MailIcon /></NavLink>
+                    <NavLink to="/Bell"className="Notify-Item Notify-Bell"><NotificationIcon /></NavLink>
+                    <NavLink to="/profile"className="Notify-Item Notify-profile"><img src={Picture} alt="" /></NavLink>
+                </div>
         </div>
     );
 }
