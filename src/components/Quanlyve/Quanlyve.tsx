@@ -1,6 +1,6 @@
 import "./Quanlyve.css"
 import {SearchIcon, FilterIcon } from "../../assets/imgs/icons/navBarIcon"
-
+import  "../Style/Style.css"
 
 
 function Quanlyve(){
@@ -31,16 +31,6 @@ function Quanlyve(){
         </tr>
         <tr>
           <td>1</td>
-          <td>ALT20210501</td>
-          <td>123456789034</td>
-          <td>Hội chợ triển lãm tiêu dùng 2021</td>
-          <td>Đã sử dụng</td>
-          <td>14/04/2021</td>
-          <td>14/04/2021</td>
-          <td>Cổng 1</td>
-        </tr>
-        <tr>
-          <td>2</td>
           <td>ALT20210501</td>
           <td>123456789034</td>
           <td>Hội chợ triển lãm tiêu dùng 2021</td>
