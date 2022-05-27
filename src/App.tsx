@@ -1,14 +1,17 @@
-
+import './App.css';
+import "antd/dist/antd.css";
+import Router from "./components/routes/index";
 import Sibar from './components/Sibar/Sibar';
+import { useState } from "react";
 
 
-function App() {
+const App = () => {
+  const [tagIndex, setTagIndex] = useState("");
   return (
-    <div className="App">
-      <Sibar/>
-      
-    </div>
+    <Sibar tagIndex={tagIndex} setTagIndex={setTagIndex}>
+      <Router setTagIndex={setTagIndex} />
+    </Sibar>
   );
-}
+};
 
 export default App;

@@ -1,44 +1,133 @@
 import React from 'react'
-import './Sibar.css'
-import { NavLink, Routes, Route } from 'react-router-dom';
-import Picture2 from "../../assets/imgs/Picture2.png"
-import { HomeIcon, TicketIcon, InVoiceIcon, SettingIcon, SearchIcon, MailIcon, NotificationIcon } from '../../assets/imgs/icons/navBarIcon'; 
-import Quanlyve from '../Quanlyve/Quanlyve';
-import DanhSachGoiVe from '../Danhsachgoive/Danhsachgoive';
+import { Avatar, Layout, Menu } from "antd";
+import { useNavigate } from 'react-router-dom';
+import { HomeIcon, HomeIconActive, TicketICon, TicketIconActive, SettingIcon, 
+    CheckTicketIcon, CheckTicketIconActive, MailIcon, SettingIconActive, BellIcon } from '../../assets/imgs/icons/navBarIcon'; 
+import Search from "../../assets/imgs/icons/Search"
 
-const logo = require('../../assets/imgs/logo.png')
 
-function Sibar(){
-    return(
-        <div className="Sibar">
-            <div className="logo"></div>
-            <div className="Frame">
-            <div  className='nav'>     
-                    <NavLink className="tag" to="/"><HomeIcon /> Trang chủ</NavLink>
-                    <NavLink className="tag" to="/Quanlyve"><TicketIcon />Quản lý vé</NavLink>
-                    <NavLink className="tag" to="/DoiSoatVe">< InVoiceIcon/> Đổi soát vé</NavLink>
-                    <NavLink className="tag" to="/Danhsachgoive"><SettingIcon /> Cài đặt</NavLink>
-                </div> 
-                
+interface Props {
+    children: React.ReactNode;
+    tagIndex: string;
+    setTagIndex: React.Dispatch<React.SetStateAction<string>>;
+  }
+  
+  const Sibar = ({ children, tagIndex, setTagIndex }: Props) => {
+    const { Header, Sider } = Layout;
+    const link = useNavigate();
+    return (
+      <Layout style={{ backgroundColor: "#F9F6F4" }}>
+        <Sider
+          width="251px"
+          style={{
+            backgroundColor: "#F9F6F4",
+            margin: "16.5px 36px 0 33px",
+          }}
+        >
+          <div className="logo">
+            <img src="./logo.png" alt="logo" height="58px"></img>
+          </div>
+          <Menu
+            style={{ backgroundColor: "#F9F6F4", border: "0", marginTop: "55px" }}
+            mode="inline"
+            selectedKeys={[tagIndex]}
+          >
+            <Menu.Item
+              key="Trangchu"
+              onClick={() => {
+                link("/");
+                setTagIndex("Trangchu");
+              }}
+            >
+              {tagIndex === "Trangchu" ? <HomeIconActive /> : <HomeIcon />}
+              Trang chủ
+            </Menu.Item>
+            <Menu.Item
+              key="Quanlyve"
+              onClick={() => {
+                link("/Quanlyve");
+                setTagIndex("Quanlyve");
+              }}
+            >
+              {tagIndex === "Quanlyve" ? <TicketIconActive /> : <TicketICon />}
+              Quản lý vé
+            </Menu.Item>
+            <Menu.Item
+              key="Doisoatve"
+              onClick={() => {
+                link("/Doisoatve");
+                setTagIndex("Doisoatve");
+              }}
+            >
+              {tagIndex === "Doisoatve" ? (
+                <CheckTicketIconActive />
+              ) : (
+                <CheckTicketIcon />
+              )}
+              Đối soát vé
+            </Menu.Item>
+            <Menu.Item
+              key="Caidat"
+              onClick={() => {
+                link("/Caidat");
+                setTagIndex("Caidat");
+              }}
+            >
+              {tagIndex === "Caidat" ? <SettingIconActive /> : <SettingIcon />}
+              Cài đặt
+            </Menu.Item>
+          </Menu>
+          <div
+            style={{
+              paddingLeft: "12px",
+              letterSpacing: "0.5px",
+              marginTop: "-5px",
+              fontSize: "18px",
+              textAlign: "center",
+            }}
+          >
+            Gói dịch vụ
+          </div>
+        </Sider>
+        <Layout
+          style={{
+            backgroundColor: "#F9F6F4",
+            paddingRight: "24px",
+            paddingBottom: "32px",
+          }}
+        >
+          <Header
+            className="site-layout-background"
+            style={{
+              height: "85px",
+              backgroundColor: "#F9F6F4",
+              padding: "0px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Search size={tagIndex !== "home" ? "470px" : "438px"} />
+            <div
+              style={{
+                paddingTop: "8px",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              <span style={{ marginRight: "24px" }}>
+                <MailIcon />
+              </span>
+              <span style={{ marginRight: "24px" }}>
+                <BellIcon />
+              </span>
+              <Avatar src="./Picture2.png" size={48} style={{ marginTop: "2px" }} />
             </div>
-            <Routes>
-                <Route path="/" element={<HomeIcon/>}></Route> 
-                <Route path="/Quanlyve" element={<Quanlyve/>}></Route>
-          
-                <Route path="/Danhsachgoive" element={<DanhSachGoiVe/>}> </Route>
-          </Routes>
-            <div className='searchBar'>
-                <input className='searchInput' placeholder='Search...'>
-                </input>
-                    <SearchIcon/>
-            </div>
-            <div className="user">
-                    <NavLink to="/Mail"className="Notify-Item Notify-Mail"><MailIcon /></NavLink>
-                    <NavLink to="/Bell"className="Notify-Item Notify-Bell"><NotificationIcon /></NavLink>
-                    <NavLink to="/profile"className="Notify-Item Notify-profile"><img src={Picture2} alt="" /></NavLink>
-                </div>
-        </div>
+          </Header>
+          {children}
+        </Layout>
+      </Layout>
     );
-}
-
-export default Sibar;
+  };
+  
+  export default Sibar;
