@@ -32,9 +32,9 @@ const Doisoatve = ({ setTagIndex }: Props) => {
     },
     {
       title: () => <div style={{}}>Số vé</div>,
-      dataIndex: "code",
-      render: (stt: string) => {
-        return <div style={{}}>{stt}</div>;
+      dataIndex: "ticketNumber",
+      render: (status: number) => {
+        return <div style={{}}>{status}</div>;
       },
     },
     // {
