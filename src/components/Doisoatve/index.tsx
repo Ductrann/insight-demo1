@@ -37,12 +37,12 @@ const Doisoatve = ({ setTagIndex }: Props) => {
         return <div style={{}}>{stt}</div>;
       },
     },
-    {
-      title: () => <div style={{}}>Tên sự kiện</div>,
-      render: (stt: string) => {
-        return <div style={{}}>Hội chợ triển lãm tiêu dùng 2021</div>;
-      },
-    },
+    // {
+    //   title: () => <div style={{}}>Tên sự kiện</div>,
+    //   render: (stt: string) => {
+    //     return <div style={{}}>Hội chợ triển lãm tiêu dùng 2021</div>;
+    //   },
+    // },
     {
       title: () => (
         <div
