@@ -1,6 +1,7 @@
 import { Layout, Typography } from "antd";
 import React, { useEffect } from "react";
 import Home from "../Trangchu/trangchu"
+import {BangTrangChu} from "../Trangchu/bangtrangchu"
 
 interface Props {
     setTagIndex: React.Dispatch<React.SetStateAction<string>>;
@@ -20,9 +21,11 @@ interface Props {
           padding: "28.5px 24.5px",
         }}
       >
-        {/* <Typography.Title style={{ fontSize: "36px", fontWeight: "700" }}>
+        <Typography.Title style={{ fontSize: "36px", fontWeight: "700" }}>
           Thống kê
-        </Typography.Title> */}
+        </Typography.Title>
+        
+        {/* <BangTrangChu/> */}
         <Home/>
       </Layout.Content>
     );

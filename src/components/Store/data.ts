@@ -2,6 +2,7 @@ export const dataTicketPage = [
     {
       stt: "1",
       code: "ALTFGHJU",
+      name:"Gói gia đình",
       ticketNumber: 123456789034,
       status: 1,
       dateUsed: "14/04/2021",
@@ -11,6 +12,7 @@ export const dataTicketPage = [
     {
       stt: "2",
       code: "ALTOJMNB",
+      name:"Gói sự kiện",
       ticketNumber: 236784631642,
       status: 0,
       dateUsed: "14/04/2021",
@@ -20,6 +22,7 @@ export const dataTicketPage = [
     {
       stt: "3",
       code: "ALTQTYJH",
+      name:"Gói gia đình",
       ticketNumber: 487621489474,
       status: -1,
       dateUsed: "14/04/2021",
@@ -29,6 +32,7 @@ export const dataTicketPage = [
     {
       stt: "4",
       code: "ALTCFSDF",
+      name:"Gói gia đình",
       ticketNumber: 156464891479,
       status: -1,
       dateUsed: "14/04/2021",
@@ -38,6 +42,7 @@ export const dataTicketPage = [
     {
       stt: "5",
       code: "ALTIOJNB",
+      name:"Gói sự kiện",
       ticketNumber: 201649631896,
       status: 1,
       dateUsed: "14/04/2021",
@@ -47,6 +52,7 @@ export const dataTicketPage = [
     {
       stt: "6",
       code: "ALTVDFTR",
+      name:"Gói sự kiện",
       ticketNumber: 148920121478,
       status: 1,
       dateUsed: "14/04/2021",
@@ -56,6 +62,7 @@ export const dataTicketPage = [
     {
       stt: "7",
       code: "ALTLIOVF",
+      name:"Gói gia đình",
       ticketNumber: 654115684899,
       status: 1,
       dateUsed: "14/04/2021",
@@ -65,6 +72,7 @@ export const dataTicketPage = [
     {
       stt: "8",
       code: "ALTSZXNH",
+      name:"Gói sự kiện",
       ticketNumber: 205465031465,
       status: 1,
       dateUsed: "14/04/2021",
@@ -74,6 +82,7 @@ export const dataTicketPage = [
     {
       stt: "9",
       code: "ALTMLNHG",
+      name:"Gói sự kiện",
       ticketNumber: 894648474910,
       status: 1,
       dateUsed: "14/04/2021",
@@ -83,6 +92,7 @@ export const dataTicketPage = [
     {
       stt: "10",
       code: "ALTETRUH",
+      name:"Gói gia đình",
       ticketNumber: 894875101400,
       status: 1,
       dateUsed: "14/04/2021",
@@ -92,6 +102,7 @@ export const dataTicketPage = [
     {
       stt: "11",
       code: "ALTCSDGF",
+      name:"Gói sự kiện",
       ticketNumber: 205314876321,
       status: 1,
       dateUsed: "14/04/2021",
@@ -101,6 +112,7 @@ export const dataTicketPage = [
     {
       stt: "12",
       code: "ALTNBVGH",
+      name:"Gói gia đình",
       ticketNumber: 185653100147,
       status: 1,
       dateUsed: "14/04/2021",
@@ -109,7 +121,8 @@ export const dataTicketPage = [
     },
     {
       stt: "13",
-      code: "ABCD123",
+      code: "ALGHTHAR",
+      name:"Gói sự kiện",
       ticketNumber: 123456789,
       status: -1,
       dateUsed: "14/04/2021",
@@ -118,7 +131,8 @@ export const dataTicketPage = [
     },
     {
       stt: "14",
-      code: "ABCD123",
+      code: "ALHGTFGR",
+      name:"Gói sự kiện",
       ticketNumber: 123456789,
       status: -1,
       dateUsed: "14/04/2021",

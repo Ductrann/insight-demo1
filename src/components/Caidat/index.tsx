@@ -35,7 +35,7 @@ const Caidat = ({ setTagIndex }: Props) => {
     },
     {
       title: () => <div style={{}}>Tên gói</div>,
-      dataIndex: "code",
+      dataIndex: "name",
       render: (stt: string) => {
         return <div style={{}}>{stt}</div>;
       },
