@@ -1,22 +1,70 @@
-import React , {useEffect, useState } from "react";
-import { Layout, Table, Typography, Checkbox, Col, DatePicker,Modal,Row, Select, TimePicker } from "antd";
-import Button from "../../assets/imgs/icons/Button";
+import { Col, DatePicker, Layout, Modal, Radio, Row, Table, Typography } from "antd";
+import React, { useEffect, useState } from "react";
+import Button from "../../assets/imgs/icons/Button"
 import Search from "../../assets/imgs/icons/Search";
 import {EditorIcon, FilterIcon} from "../../assets/imgs/icons/navBarIcon";
-import {dataTicketPage} from "../Store/data"
-
-
-
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase/database";
+import moment from "moment";
+import { CSVLink} from "react-csv";
 interface Props {
   setTagIndex: React.Dispatch<React.SetStateAction<string>>;
 }
 
+interface Item {
+  code: string;
+  dateExport: string;
+  dateUsed: string;
+  id: string;
+  name: string;
+  price: string;
+  priceC: string;
+  status: number;
+  stt: number;
+}
+
 const Caidat = ({ setTagIndex }: Props) => {
-  useEffect(() => {
-    setTagIndex("Caidat");
+  const [dataTicketPage, setDataTicketPage] = useState<any[]>([]);
+  const [item, setItem] = useState<Item>({
+    code: "ABCDEF10",
+    dateExport: "10/01/2022",
+    dateUsed: "10/03/2022",
+    id: "04G1r7p26PdNIhQSsOfK",
+    name: "AAAAAA10",
+    price: "Cổng 1",
+    priceC: "Cổng 1",
+    status: 1,
+    stt: 10,
   });
 
+  useEffect(() => {
+    setTagIndex("Caidat");
+    const data = async () => {
+      // const ticket = await getDocs(collection(db, "ticket"));
+      // const ticketData = ticket.docs.map((item: any) => {
+      //   return {
+      //     ...item.data(),
+      //     id: item.id,
+      //   };
+      // });
+      // const q = query(
+      //   collection(db, "ticket"),
+      //   where("author", "==", "patrick rothfuss"),
+      //   orderBy("createdAt")
+      // );
+      onSnapshot(collection(db, "setting"), (snapshot: any) => {
+        const books: any = [];
+        snapshot.docs.forEach((doc: any) => {
+          books.push({ ...doc.data(), id: doc.id });
+        });
+        setDataTicketPage(books);
+      });
+    };
+    data();
+  }, [setTagIndex]);
+
   const [modal, setModal] = useState(false);
+  const [modalUpdate, setModalUpdate] = useState(false);
 
   const columns = [
     {
@@ -88,14 +136,14 @@ const Caidat = ({ setTagIndex }: Props) => {
     },
     {
       title: () => <div style={{}}>Giá vé {"(VND/Vé)"}</div>,
-      dataIndex: "code",
+      dataIndex: "price",
       render: () => {
         return <div style={{}}>90.000 VNĐ</div>;
       },
     },
     {
       title: () => <div style={{}}>Giá vé {"(VND/Combo)"}</div>,
-      dataIndex: "code",
+      dataIndex: "priceC",
       render: () => {
         return <div style={{}}>360.000 VNĐ/4 Vé</div>;
       },
@@ -153,7 +201,7 @@ const Caidat = ({ setTagIndex }: Props) => {
 
     {
       title: "",
-      render: () => {
+      render: (item: any) => {
         return (
           <div
             style={{
@@ -164,9 +212,13 @@ const Caidat = ({ setTagIndex }: Props) => {
               alignItems: "center",
               cursor: "pointer",
             }}
+            onClick={() => {
+              setModalUpdate(true);
+              setItem(item);
+            }}
           >
             <EditorIcon />
-            <span style={{ marginLeft: "4px" }}> Cập nhật</span>
+            <span style={{ marginLeft: "4px" }}>Cập nhật</span>
           </div>
         );
       },
@@ -195,15 +247,17 @@ const Caidat = ({ setTagIndex }: Props) => {
       >
         <Search size="445px" placeholder="Tìm bằng số vé" />
         <div style={{ marginTop: "-4px" }}>
-          <Button padding="0 24px" margin="0 10px" width="fit-content">
-            <span
-              style={{
-                display: "inline-block",
-                transform: "translate(-6px, 4px)",
-              }}
-            ></span>
-            Xuất file (.csv)
-          </Button>
+          <CSVLink data={dataTicketPage}>
+            <Button padding="0 24px" margin="0 10px" width="fit-content">
+              <span
+                style={{
+                  display: "inline-block",
+                  transform: "translate(-6px, 4px)",
+                }}
+              ></span>
+              Xuất file (.csv)
+            </Button>
+          </CSVLink>
           <Button width="180px" type="primary" onClick={() => setModal(true)}>
             Thêm gói vé
           </Button>
@@ -226,6 +280,252 @@ const Caidat = ({ setTagIndex }: Props) => {
           nextIcon: <span style={{ color: "#A5A8B1" }}> &#9654;</span>,
         }}
       />
+      <Modal
+        visible={modalUpdate}
+        onOk={() => setModalUpdate(false)}
+        closeIcon={<></>}
+        width="750px"
+        bodyStyle={{ borderRadius: "16px" }}
+        onCancel={() => setModalUpdate(false)}
+        cancelText="Hủy"
+        okButtonProps={{
+          style: {
+            marginRight: "230px",
+            height: "40px",
+            padding: "0 48px",
+            borderRadius: "8px",
+            backgroundColor: "#FF993C",
+            border: "2px solid #FF993C",
+            fontSize: "16px",
+            fontWeight: "600",
+          },
+        }}
+        cancelButtonProps={{
+          style: {
+            height: "40px",
+            padding: "0 48px",
+            borderRadius: "8px",
+            border: "2px solid #FF993C",
+            fontSize: "16px",
+            color: "#FF993C",
+            fontWeight: "600",
+          },
+        }}
+        okText="Lưu"
+      >
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <span
+            style={{ fontSize: "24px", fontWeight: "600", marginTop: "-4px" }}
+          >
+            Cập nhật thông tin gói vé
+          </span>
+        </div>
+        <Row>
+          <Col span={11}>
+            <div style={{ marginTop: "24px" }}>
+              <span style={{ fontSize: "16px", margin: "opx 4px" }}>
+                Mã sự kiện
+              </span>
+              <span style={{ color: "red" }}> *</span>
+            </div>
+            <input
+              type="text"
+              value={item.code}
+              style={{
+                padding: "20px",
+                marginTop: "4px",
+                border: "1px solid #A5A8B1",
+                borderRadius: "8px",
+                height: "40px",
+                width: "250px",
+              }}
+            />
+          </Col>
+          <Col span={11}>
+            <div style={{ marginTop: "24px" }}>
+              <span style={{ fontSize: "16px", margin: "opx 4px" }}>
+                Tên sự kiện
+              </span>
+              <span style={{ color: "red" }}> *</span>
+            </div>
+            <input
+              type="text"
+              value={item.name}
+              placeholder="Hội chợ triển lãm hàng tiêu dùng 2021"
+              style={{
+                padding: "20px",
+                marginTop: "4px",
+                border: "1px solid #A5A8B1",
+                borderRadius: "8px",
+                height: "40px",
+                width: "370px",
+              }}
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span={11}>
+            <div style={{ marginTop: "24px", marginBottom: "4px" }}>
+              <span style={{ fontSize: "16px", margin: "opx 4px" }}>
+                Ngày áp dụng
+              </span>
+            </div>
+            <DatePicker
+              value={moment(item.dateUsed)}
+              style={{ height: "40px", width: "145px" }}
+              // placeholder="dd:mm:yy"
+            />
+            <TimePicker
+              value={moment(item.dateUsed)}
+              use12Hours
+              format="h:mm:ss"
+              placeholder="hh:mm:yy"
+              style={{ width: 140, height: "40px", marginLeft: "8px" }}
+            />
+          </Col>
+          <Col span={12}>
+            <div style={{ marginTop: "24px", marginBottom: "4px" }}>
+              <span style={{ fontSize: "16px", margin: "0px 4px" }}>
+                Ngày hết hạn
+              </span>
+            </div>
+            <DatePicker
+              value={moment(item.dateExport)}
+              style={{ height: "40px", width: "145px" }}
+              // placeholder="dd:mm:yyy"
+            />
+            <TimePicker
+              value={moment(item.dateExport)}
+              placeholder="hh:mm:yy"
+              use12Hours
+              format="h:mm:ss"
+              style={{ width: 140, height: "40px", marginLeft: "8px" }}
+            />
+          </Col>
+        </Row>
+        <div style={{ fontSize: "16px", margin: "28px 0 0 4px" }}>
+          Giá vé áp dụng
+        </div>
+        <div
+          style={{ display: "flex", alignItems: "center", fontSize: "16px" }}
+        >
+          <Checkbox style={{ width: "20px" }}></Checkbox>Vé lẻ (vnđ/vé) với giá
+          <div
+            style={{
+              color: "#A5A8B1",
+              alignItems: "center",
+              margin: "0 4px",
+              padding: "0 8px",
+              display: "inline-flex",
+              height: "40px",
+              width: "150px",
+              background: "#F1F4F8",
+              borderRadius: "8px",
+            }}
+          >
+            <input
+              defaultValue={90000}
+              placeholder="Giá vé"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "none",
+                outline: "none",
+              }}
+            />
+          </div>
+          /vé
+        </div>
+        <div
+          style={{
+            marginTop: "8px",
+            display: "flex",
+            alignItems: "center",
+            fontSize: "16px",
+          }}
+        >
+          <Checkbox style={{ width: "20px" }}></Checkbox>Combo vé với giá
+          <div
+            style={{
+              color: "#A5A8B1",
+              alignItems: "center",
+              margin: "0 4px",
+              padding: "0 8px",
+              display: "inline-flex",
+              height: "40px",
+              width: "150px",
+              background: "#F1F4F8",
+              borderRadius: "8px",
+            }}
+          >
+            <input
+              defaultValue={360000}
+              placeholder="Giá vé"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "none",
+                outline: "none",
+              }}
+            />
+          </div>
+          /
+          <div
+            style={{
+              color: "#A5A8B1",
+              alignItems: "center",
+              margin: "0 4px",
+              padding: "0 8px",
+              display: "inline-flex",
+              height: "40px",
+              width: "150px",
+              background: "#F1F4F8",
+              borderRadius: "8px",
+            }}
+          >
+            <input
+              defaultValue={90000}
+              placeholder="Giá vé"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "none",
+                outline: "none",
+              }}
+            />
+          </div>
+          vé
+        </div>
+        <div style={{ fontSize: "16px", margin: "28px 0 0 4px" }}>
+          Tình trạng
+        </div>
+        <Select
+          showSearch
+          size="large"
+          style={{ width: "180px", marginBottom: "20px" }}
+          placeholder="Đang áp dụng"
+          optionFilterProp="children"
+          filterOption={(input, option) =>
+            (option!.children as unknown as string).includes(input)
+          }
+          filterSort={(optionA, optionB) =>
+            (optionA!.children as unknown as string)
+              .toLowerCase()
+              .localeCompare(
+                (optionB!.children as unknown as string).toLowerCase()
+              )
+          }
+        ></Select>
+
+        <div>
+          <span style={{ color: "red" }}> *</span>{" "}
+          <span style={{ fontStyle: "italic" }}>là thông tin bắt buộc</span>
+        </div>
+      </Modal>
       <Modal
         visible={modal}
         onOk={() => setModal(false)}
@@ -293,12 +593,12 @@ const Caidat = ({ setTagIndex }: Props) => {
             </div>
             <DatePicker
               style={{ height: "40px", width: "145px" }}
-              placeholder="dd/mm/yy"
+              placeholder="dd:mm:yy"
             />
             <TimePicker
               use12Hours
-              format="hh:mm:ss"
-              placeholder="hh:mm:ss"
+              format="h:mm:ss"
+              placeholder="hh:mm:yy"
               style={{ width: 140, height: "40px", marginLeft: "8px" }}
             />
           </Col>
@@ -310,10 +610,10 @@ const Caidat = ({ setTagIndex }: Props) => {
             </div>
             <DatePicker
               style={{ height: "40px", width: "145px" }}
-              placeholder="dd/mm/yy"
+              placeholder="dd:mm:yyy"
             />
             <TimePicker
-              placeholder="hh/mm/yy"
+              placeholder="hh:mm:yy"
               use12Hours
               format="h:mm:ss"
               style={{ width: 140, height: "40px", marginLeft: "8px" }}
@@ -340,7 +640,16 @@ const Caidat = ({ setTagIndex }: Props) => {
               borderRadius: "8px",
             }}
           >
-            Giá vé
+            <input
+              placeholder="Giá vé"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "none",
+                outline: "none",
+              }}
+            />
           </div>
           /vé
         </div>
@@ -366,7 +675,16 @@ const Caidat = ({ setTagIndex }: Props) => {
               borderRadius: "8px",
             }}
           >
-            Giá vé
+            <input
+              placeholder="Giá vé"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "none",
+                outline: "none",
+              }}
+            />
           </div>
           /
           <div
@@ -382,7 +700,16 @@ const Caidat = ({ setTagIndex }: Props) => {
               borderRadius: "8px",
             }}
           >
-            Giá vé
+            <input
+              placeholder="Giá vé"
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                background: "none",
+                outline: "none",
+              }}
+            />
           </div>
           vé
         </div>
