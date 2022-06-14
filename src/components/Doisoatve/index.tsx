@@ -17,19 +17,7 @@ const Doisoatve = ({ setTagIndex }: Props) => {
   useEffect(() => {
     setTagIndex("Doisoatve");
     const data = async () => {
-      // const ticket = await getDocs(collection(db, "ticket"));
-      // const ticketData = ticket.docs.map((item: any) => {
-      //   return {
-      //     ...item.data(),
-      //     id: item.id,
-      //   };
-      // });
-      // const q = query(
-      //   collection(db, "ticket"),
-      //   where("author", "==", "patrick rothfuss"),
-      //   orderBy("createdAt")
-      // );
-      onSnapshot(collection(db, "ticket"), (snapshot: any) => {
+      onSnapshot(collection(db, "Doisoatve"), (snapshot: any) => {
         const books: any = [];
         snapshot.docs.forEach((doc: any) => {
           books.push({ ...doc.data(), id: doc.id });
