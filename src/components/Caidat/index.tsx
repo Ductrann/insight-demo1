@@ -1,4 +1,4 @@
-import { Col, DatePicker, Layout, Modal, Radio, Row, Table, Typography } from "antd";
+import { Col, DatePicker, Layout, Modal, Radio, Row, Table, Typography, TimePicker, Checkbox, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import Button from "../../assets/imgs/icons/Button"
 import Search from "../../assets/imgs/icons/Search";
@@ -6,7 +6,7 @@ import {EditorIcon, FilterIcon} from "../../assets/imgs/icons/navBarIcon";
 import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/database";
 import moment from "moment";
-import { CSVLink} from "react-csv";
+import { CSVLink } from "react-csv";
 interface Props {
   setTagIndex: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -52,7 +52,7 @@ const Caidat = ({ setTagIndex }: Props) => {
       //   where("author", "==", "patrick rothfuss"),
       //   orderBy("createdAt")
       // );
-      onSnapshot(collection(db, "setting"), (snapshot: any) => {
+      onSnapshot(collection(db, "Caidat"), (snapshot: any) => {
         const books: any = [];
         snapshot.docs.forEach((doc: any) => {
           books.push({ ...doc.data(), id: doc.id });

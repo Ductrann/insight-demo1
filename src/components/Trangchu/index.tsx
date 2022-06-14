@@ -112,8 +112,8 @@ const Trangchu = ({ setTagIndex }: Props) => {
       </div>
       <Area {...config} />
       <div style={{ marginTop: "64px" }}>Tổng doanh thu theo tuần</div>
-      <h1 style={{ fontWeight: "bold", display: "inline" }}>525.145.000 </h1>
-      <span style={{ display: "inline" }}>đồng</span>
+      <h1 style={{ fontWeight: "bold", display: "inline" }}>500.000.000 </h1>
+      <span style={{ display: "inline" }}>Đồng</span>
       <Row>
         <Col span={5}>
           <div
