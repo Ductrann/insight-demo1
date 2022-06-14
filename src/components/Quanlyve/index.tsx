@@ -185,23 +185,6 @@ import moment from "moment";
             >
               Lọc vé
             </Typography.Title>
-            <Select
-              showSearch
-              size="large"
-              style={{ width: "100%", marginBottom: "20px" }}
-              placeholder="Search to Select"
-              optionFilterProp="children"
-              filterOption={(input, option) =>
-                (option!.children as unknown as string).includes(input)
-              }
-              filterSort={(optionA, optionB) =>
-                (optionA!.children as unknown as string)
-                  .toLowerCase()
-                  .localeCompare(
-                    (optionB!.children as unknown as string).toLowerCase()
-                  )
-              }
-            ></Select>
             <Row>
               <Col span={11} style={{ fontSize: "16px" }}>
                 Tình trạng đối soát
