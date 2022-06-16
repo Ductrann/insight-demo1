@@ -26,11 +26,11 @@ interface Item {
 const Caidat = ({ setTagIndex }: Props) => {
   const [dataTicketPage, setDataTicketPage] = useState<any[]>([]);
   const [item, setItem] = useState<Item>({
-    code: "ABCDEF10",
-    dateExport: "10/01/2022",
+    code: "ASSSSS10",
+    dateExport: "10/03/2022",
     dateUsed: "10/03/2022",
     id: "04G1r7p26PdNIhQSsOfK",
-    name: "AAAAAA10",
+    name: "SSSSS10",
     price: "Cổng 1",
     priceC: "Cổng 1",
     status: 1,
@@ -40,18 +40,7 @@ const Caidat = ({ setTagIndex }: Props) => {
   useEffect(() => {
     setTagIndex("Caidat");
     const data = async () => {
-      // const ticket = await getDocs(collection(db, "ticket"));
-      // const ticketData = ticket.docs.map((item: any) => {
-      //   return {
-      //     ...item.data(),
-      //     id: item.id,
-      //   };
-      // });
-      // const q = query(
-      //   collection(db, "ticket"),
-      //   where("author", "==", "patrick rothfuss"),
-      //   orderBy("createdAt")
-      // );
+    
       onSnapshot(collection(db, "Caidat"), (snapshot: any) => {
         const books: any = [];
         snapshot.docs.forEach((doc: any) => {

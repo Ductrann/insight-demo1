@@ -8,6 +8,7 @@ import { db } from "../../firebase/database";
 import { collection, onSnapshot } from "firebase/firestore";
 import { CSVLink } from "react-csv";
 
+
 interface Props {
   setTagIndex: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -245,20 +246,7 @@ const Quanlyve = ({ setTagIndex }: Props) => {
           <CSVLink data={dataTicketPage}>
             <Button
               width="180px"
-              // onClick={() => {
-              //   [...Array(30)].map((x, i) =>
-              //     addDoc(collection(db, "setting"), {
-              //       stt: i,
-              //       code: "ABCDEF" + i,
-              //       name: "AAAAAA" + i,
-              //       dateUsed: i + "/03/2022",
-              //       dateExport: i + "/01/2022",
-              //       price: "Cổng 1",
-              //       priceC: "Cổng 1",
-              //       status: Math.floor(Math.random() * 3) - 1,
-              //     })
-              //   );
-              // }}
+              
             >
               Xuất file (.csv)
             </Button>
